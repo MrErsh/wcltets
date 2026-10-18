@@ -1,0 +1,51 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:WclTest.Client.ViewModels"
+             xmlns:models="using:WclTest.Client.Models"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="560"
+             x:Class="WclTest.Client.Views.MainView"
+             x:DataType="vm:MainViewModel">
+    <Grid Margin="16"
+          ColumnDefinitions="*,280">
+
+        <Grid RowDefinitions="Auto,Auto,*"
+              Grid.Column="0"
+              Margin="0,0,12,0">
+
+            <ItemsControl Grid.Row="1"
+                          Margin="0,0,0,12"
+                          ItemsSource="{Binding Sections}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="8"
+                                    HorizontalAlignment="Center" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="models:Section">
+                        <Button Classes="section"
+                                Classes.selected="{Binding IsSelected}"
+                                HorizontalAlignment="Center"
+                                Content="{Binding Title}"
+                                Command="{Binding $parent[ItemsControl].((vm:MainViewModel)DataContext).SelectSectionCommand}"
+                                CommandParameter="{Binding}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Border Classes="card"
+                    Grid.Row="2">
+                <ContentControl Content="{Binding CurrentSection.Content}" />
+            </Border>
+        </Grid>
+
+        <Border Classes="card"
+                Grid.Column="1">
+            <ContentControl Content="{Binding Auth}" />
+        </Border>
+    </Grid>
+</UserControl>

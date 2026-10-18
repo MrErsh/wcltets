@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:WclTest.Client.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="620" d:DesignHeight="560"
+             x:Class="WclTest.Client.Views.AboutView"
+             x:DataType="vm:AboutViewModel">
+    <StackPanel Spacing="4">
+        <TextBlock Classes="title"
+                   Margin="0,0,0,8" 
+                   Text="О разработчике" />
+
+        <TextBlock Classes="fieldValue"
+                   FontWeight="SemiBold"
+                   FontSize="15"
+                   Text="{Binding Name}" />
+
+        <TextBlock Classes="label"
+                   Text="{Binding Role}" />
+
+        <TextBlock Classes="label"
+                   Text="{Binding Location}" />
+
+        <TextBlock Classes="fieldValue"
+                   Margin="0,8,0,0" 
+                   Text="{Binding GitHub}" />
+
+        <TextBlock Classes="fieldValue"
+                   Text="{Binding Telegram}" />
+
+        <TextBlock Classes="fieldValue"
+                   Text="{Binding Email}" />
+
+        <TextBlock Classes="label"
+                   Margin="0,8,0,0"
+                   TextWrapping="Wrap" 
+                   Text="{Binding Stack}" />
+    </StackPanel>
+</UserControl>

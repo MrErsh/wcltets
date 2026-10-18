@@ -1,0 +1,69 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:WclTest.Client.ViewModels"
+             xmlns:conv="using:Avalonia.Data.Converters"
+             mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="300"
+             x:Class="WclTest.Client.Views.RegisterView"
+             x:DataType="vm:RegisterViewModel"
+             Width="320">
+    <StackPanel Margin="18"
+                Spacing="12">
+        <TextBlock Classes="title"
+                   Text="Регистрация" />
+
+        <StackPanel Spacing="4">
+            <TextBlock Classes="label"
+                       Text="Email" />
+            <TextBox PlaceholderText="you@example.com"
+                     Text="{Binding Email}" />
+        </StackPanel>
+
+        <StackPanel Spacing="4">
+            <TextBlock Classes="label"
+                       Text="Имя" />
+            <TextBox PlaceholderText="Иван Иванов"
+                     Text="{Binding Name}" />
+        </StackPanel>
+
+        <StackPanel Spacing="4">
+            <TextBlock Classes="label"
+                       Text="Пароль" />
+            <TextBox PasswordChar="●"
+                     PlaceholderText="минимум 6 символов"
+                     Text="{Binding Password}" />
+        </StackPanel>
+
+        <Border Classes="errorBox"
+                IsVisible="{Binding Error, Converter={x:Static conv:StringConverters.IsNotNullOrEmpty}}">
+            <TextBlock Text="{Binding Error}" />
+        </Border>
+
+        <Grid>
+            <StackPanel Orientation="Horizontal"
+                        Spacing="8"
+                        HorizontalAlignment="Right"
+                        IsVisible="{Binding !RegisterCommand.IsRunning}">
+                <Button Content="Отмена"
+                        Command="{Binding CancelCommand}" />
+                <Button Classes="primary"
+                        IsDefault="True"
+                        Content="Зарегистрироваться"
+                        Command="{Binding RegisterCommand}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Spacing="8"
+                        HorizontalAlignment="Right"
+                        IsVisible="{Binding RegisterCommand.IsRunning}">
+                <ProgressBar IsIndeterminate="True"
+                             Width="60"
+                             VerticalAlignment="Center" />
+                <Button Content="Отменить"
+                        Command="{Binding CancelRegisterCommand}"
+                        VerticalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</UserControl>

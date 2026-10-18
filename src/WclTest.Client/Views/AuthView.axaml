@@ -1,0 +1,74 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:WclTest.Client.ViewModels"
+             xmlns:conv="using:Avalonia.Data.Converters"
+             mc:Ignorable="d" d:DesignWidth="280" d:DesignHeight="560"
+             x:Class="WclTest.Client.Views.AuthView"
+             x:DataType="vm:AuthViewModel">
+    <DockPanel>
+        <Button DockPanel.Dock="Bottom"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                Margin="0,16,0,0"
+                IsVisible="{Binding !AuthService.IsAuthenticated}"
+                Content="Регистрация"
+                Command="{Binding RegisterCommand}"/>
+
+        <StackPanel Spacing="12">
+            <TextBlock Classes="title"
+                       Text="Аккаунт" />
+
+            <StackPanel Spacing="12" IsVisible="{Binding !AuthService.IsAuthenticated}">
+                <StackPanel Spacing="4">
+                    <TextBlock Classes="label"
+                               Text="Email" />
+
+                    <TextBox PlaceholderText="you@example.com"
+                             Text="{Binding Email}" />
+                </StackPanel>
+
+                <StackPanel Spacing="4">
+                    <TextBlock Classes="label"
+                               Text="Пароль" />
+
+                    <TextBox PasswordChar="●"
+                             PlaceholderText="••••••"
+                             Text="{Binding Password}" />
+                </StackPanel>
+
+                <Border Classes="errorBox"
+                        IsVisible="{Binding Error, Converter={x:Static conv:StringConverters.IsNotNullOrEmpty}}">
+                    <TextBlock Text="{Binding Error}" />
+                </Border>
+
+                <Grid>
+                    <Button Classes="primary"
+                            IsDefault="True"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Content="Войти"
+                            Command="{Binding LoginCommand}"
+                            IsVisible="{Binding !LoginCommand.IsRunning}" />
+
+                    <Button HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Content="Отмена"
+                            Command="{Binding CancelLoginCommand}"
+                            IsVisible="{Binding LoginCommand.IsRunning}" />
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Spacing="12"
+                        IsVisible="{Binding AuthService.IsAuthenticated}">
+                <TextBlock Classes="title"
+                           Text="{Binding AuthService.CurrentUser.Name}" />
+
+                <Button HorizontalAlignment="Stretch"
+                        Content="Выйти"
+                        Command="{Binding LogoutCommand}" />
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

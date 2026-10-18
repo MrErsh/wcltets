@@ -1,0 +1,61 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Styles.Resources>
+        <SolidColorBrush x:Key="AccentBrush" Color="#2D7D9A" />
+        <SolidColorBrush x:Key="AccentTextBrush" Color="White" />
+        <SolidColorBrush x:Key="CardStrokeBrush" Color="#22808080" />
+        <SolidColorBrush x:Key="MutedBrush" Color="#8A8A8A" />
+        <SolidColorBrush x:Key="ErrorBrush" Color="#C0392B" />
+    </Styles.Resources>
+
+    <Style Selector="Border.card">
+        <Setter Property="Background" Value="#0A808080" />
+        <Setter Property="BorderBrush" Value="{StaticResource CardStrokeBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="16" />
+    </Style>
+
+    <Style Selector="Button.section">
+        <Setter Property="MinWidth" Value="120" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Button.section:selected">
+        <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource AccentTextBrush}" />
+    </Style>
+
+    <Style Selector="Button.primary">
+        <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource AccentTextBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.title">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <Style Selector="TextBlock.label">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.fieldValue">
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style Selector="Border.errorBox">
+        <Setter Property="Background" Value="#1AC0392B" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Padding" Value="10,6" />
+    </Style>
+
+    <Style Selector="Border.errorBox TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource ErrorBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+</Styles>

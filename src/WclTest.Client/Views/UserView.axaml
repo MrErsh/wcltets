@@ -1,0 +1,102 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:WclTest.Client.ViewModels"
+             xmlns:conv="using:Avalonia.Data.Converters"
+             mc:Ignorable="d" d:DesignWidth="620" d:DesignHeight="560"
+             x:Class="WclTest.Client.Views.UserView"
+             x:DataType="vm:UserViewModel">
+    <Panel>
+        <StackPanel Spacing="8"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    IsVisible="{Binding !AuthService.IsAuthenticated}">
+            <TextBlock Classes="title"
+                       Text="Профиль" />
+            <TextBlock Classes="label" 
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       Text="Войдите или зарегистрируйтесь, чтобы увидеть данные пользователя."/>
+        </StackPanel>
+
+        <StackPanel Spacing="12"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    IsVisible="{Binding AuthService.IsAuthenticated}">
+            <Panel Width="72"
+                   Height="72"
+                   HorizontalAlignment="Center">
+                <Border Background="#2D7D9A"
+                        CornerRadius="36">
+                    <TextBlock FontSize="30"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Text="{Binding Initials}"/>
+                </Border>
+
+                <Border CornerRadius="36"
+                        ClipToBounds="True"
+                        IsVisible="{Binding Avatar, Converter={x:Static conv:ObjectConverters.IsNotNull}}">
+                    <Image Source="{Binding Avatar}" />
+                </Border>
+            </Panel>
+
+            <TextBlock Classes="title"
+                       HorizontalAlignment="Center"
+                       Text="{Binding AuthService.CurrentUser.Name}" />
+
+            <Grid ColumnDefinitions="Auto,*"
+                  RowDefinitions="Auto,Auto,Auto,Auto"
+                  Margin="0,4,0,0">
+                <TextBlock Classes="label"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           Margin="0,0,16,4" 
+                           Text="ID" />
+
+                <TextBlock Classes="fieldValue"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           Margin="0,0,0,4"
+                           Text="{Binding AuthService.CurrentUser.Id}" />
+
+                <TextBlock Classes="label"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           Margin="0,0,16,4"
+                           Text="Email" />
+
+                <TextBlock Classes="fieldValue"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           Margin="0,0,0,4"
+                           Text="{Binding AuthService.CurrentUser.Email}" />
+
+                <TextBlock Classes="label"
+                           Grid.Row="2"
+                           Grid.Column="0"
+                           Margin="0,0,16,4"
+                           Text="Имя" />
+
+                <TextBlock Classes="fieldValue"
+                           Grid.Row="2"
+                           Grid.Column="1"
+                           Margin="0,0,0,4"
+                           Text="{Binding AuthService.CurrentUser.Name}" />
+
+                <TextBlock Classes="label"
+                           Grid.Row="3"
+                           Grid.Column="0"
+                           Margin="0,0,16,0"
+                           Text="Роль" />
+
+                <TextBlock Classes="fieldValue"
+                           Grid.Row="3"
+                           Grid.Column="1"
+                           Text="{Binding AuthService.CurrentUser.Role}" />
+            </Grid>
+        </StackPanel>
+    </Panel>
+</UserControl>

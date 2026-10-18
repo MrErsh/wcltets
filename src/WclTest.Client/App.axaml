@@ -1,0 +1,15 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:WclTest.Client"
+             x:Class="WclTest.Client.App"
+             RequestedThemeVariant="Default">
+
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://WclTest.Client/Themes/Styles.axaml" />
+    </Application.Styles>
+
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
+</Application>

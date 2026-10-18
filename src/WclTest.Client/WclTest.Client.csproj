@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Configurations>Debug;Release;FakeApi</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'FakeApi'">
+    <DefineConstants>$(DefineConstants);DEBUG;FAKE_API</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.4" /> 
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.4" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.4" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.4" />
+    <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3">
+      <IncludeAssets Condition="'$(Configuration)' != 'Debug' And '$(Configuration)' != 'FakeApi'">None</IncludeAssets>
+      <PrivateAssets Condition="'$(Configuration)' != 'Debug' And '$(Configuration)' != 'FakeApi'">All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.12" />
+    <PackageReference Include="Polly.Core" Version="8.8.0" />
+    <PackageReference Include="Serilog" Version="4.4.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WclTest.Api\WclTest.Api.csproj" />
+    <ProjectReference Include="..\WclTest.Shared\WclTest.Shared.csproj" />
+    <ProjectReference Include="..\WclTest.Model\WclTest.Model.csproj" />
+    <ProjectReference Include="..\WclTest.Api.Fake\WclTest.Api.Fake.csproj" Condition="'$(Configuration)' == 'FakeApi'" />
+  </ItemGroup>
+
+</Project>
