@@ -26,3 +26,6 @@ Tests:
 
 FakeApi — отдельная конфигурация WclTest.Client: условный ProjectReference на Api.Fake +
 #if FAKE_API в DI. В Debug/Release fake не подключается и не собирается (нет .Build.0 в .sln).
+
+
+<img width="901" height="589" alt="scrn" src="https://github.com/user-attachments/assets/db4a350f-2666-4a3f-a43d-e7413e07d9a5" />
